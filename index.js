@@ -1,4 +1,4 @@
-const { stringToHexColor } = require('jukwaa-core/utils/ColorUtils');
+
 
 const backgroundColors = [
     '004075',
@@ -19,6 +19,26 @@ const backgroundColors = [
     'FFCF61'
 ];
 
+const hashCode = (str) => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return hash;
+};
+
+const intToHex = (i) => {
+    let c = (i & 0x00FFFFFF)
+        .toString(16)
+        .toUpperCase();
+    return '00000'.substring(0, 6 - c.length) + c;
+};
+
+const stringToHexColor = (str) => {
+    return intToHex(hashCode(str));
+}
+
+
 module.exports = {
     getAvatarcColor(clientName){
         const backgroundColor = stringToHexColor(clientName);
@@ -27,7 +47,6 @@ module.exports = {
         colorList.sort();
         const colorIndex = Math.min(colorList.indexOf(backgroundColor), backgroundColors.length - 1);
         const colorFromList = backgroundColors[colorIndex];
-
         return colorFromList;
     }
 
