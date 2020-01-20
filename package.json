@@ -5,6 +5,6 @@
   "private": true,
   "main": "index.js",
   "dependencies": {
-    "jukwaa-core": "5.2.439"
+    
   }
 }
